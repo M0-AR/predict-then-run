@@ -8,6 +8,8 @@
 
 **Write the claim. Freeze it. Run the experiment. Publish what survives.**
 
+Repository: [github.com/M0-AR/predict-then-run](https://github.com/M0-AR/predict-then-run)
+
 A prediction-first benchmark for AI research and product decisions: 33 claims, a hash-chained ledger, and a scorecard that includes the 5 predictions that failed. *Working paper; every number is generated from `results/scores.json` and the raw run files.*
 
 ## The 60-second version
@@ -178,7 +180,7 @@ If you can explain why a refuted claim is more useful than a vague success story
 
 **Why does the memory-gating result matter?** It is a trade-off, not a free lunch: the learned gate improves updated-fact accuracy by suppressing hints, while old-fact recall falls sharply. That is more useful than a clean-sounding claim that hides the cost.
 
-**How do I cite it?** Use `CITATION.cff`. Add the repository URL when you publish your fork.
+**How do I cite it?** Use `CITATION.cff`; the repository URL is included.
 
 **Is the quiz graded?** No. It is a teaching device; the score resets on refresh.
 
@@ -202,8 +204,8 @@ If you can explain why a refuted claim is more useful than a vague success story
 
 ## Publishing this page
 
-1. Push the repository to GitHub.
-2. Open **Settings → Pages → Deploy from a branch**, choose `main` and `/ (root)`.
+1. Open the public repository `M0-AR/predict-then-run`.
+2. Go to **Settings → Pages → Deploy from a branch**, choose `main` and `/ (root)`.
 3. Wait for the Pages build. `index.html` redirects to `preview.html`.
 4. Set the repository social preview to `assets/banner.png`.
 5. Check the claims table, the quiz and the mobile menu on the published URL.

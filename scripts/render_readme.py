@@ -139,6 +139,9 @@ def main() -> None:
     )
     lines.append("**Write the claim. Freeze it. Run the experiment. Publish what survives.**\n")
     lines.append(
+        "Repository: [github.com/M0-AR/predict-then-run](https://github.com/M0-AR/predict-then-run)\n"
+    )
+    lines.append(
         "A prediction-first benchmark for AI research and product decisions: "
         f"{agg['n_predictions']} claims, a hash-chained ledger, and a scorecard that includes the "
         f"{agg['n_refuted']} predictions that failed. *Working paper; every number is generated from "
@@ -370,7 +373,7 @@ def main() -> None:
         "**Why does the memory-gating result matter?** It is a trade-off, not a free lunch: the "
         "learned gate improves updated-fact accuracy by suppressing hints, while old-fact recall "
         "falls sharply. That is more useful than a clean-sounding claim that hides the cost.\n\n"
-        "**How do I cite it?** Use `CITATION.cff`. Add the repository URL when you publish your fork.\n\n"
+        "**How do I cite it?** Use `CITATION.cff`; the repository URL is included.\n\n"
         "**Is the quiz graded?** No. It is a teaching device; the score resets on refresh.\n"
     )
 
@@ -395,8 +398,8 @@ def main() -> None:
 
     lines.append("## Publishing this page\n")
     lines.append(
-        "1. Push the repository to GitHub.\n"
-        "2. Open **Settings → Pages → Deploy from a branch**, choose `main` and `/ (root)`.\n"
+        "1. Open the public repository `M0-AR/predict-then-run`.\n"
+        "2. Go to **Settings → Pages → Deploy from a branch**, choose `main` and `/ (root)`.\n"
         "3. Wait for the Pages build. `index.html` redirects to `preview.html`.\n"
         "4. Set the repository social preview to `assets/banner.png`.\n"
         "5. Check the claims table, the quiz and the mobile menu on the published URL.\n"
