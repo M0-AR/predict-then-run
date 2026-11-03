@@ -228,7 +228,7 @@ def main() -> None:
         html = html.replace(key, value)
     (ROOT / "preview.html").write_text(html)
     (ROOT / "assets/data.json").write_text(json.dumps(data, indent=2, ensure_ascii=False))
-    (ROOT / "index.html").write_text(
+    redirect = (
         "<!doctype html>\n"
         '<html lang="en"><head><meta charset="utf-8">\n'
         '<meta http-equiv="refresh" content="0; url=preview.html">\n'
@@ -238,7 +238,27 @@ def main() -> None:
         '<p>Opening <a style="color:#5eead4" href="preview.html">the interactive preview</a>\u2026</p>\n'
         "</body></html>\n"
     )
-    print(f"wrote preview.html, index.html, assets/data.json ({len(data['predictions'])} claims)")
+    (ROOT / "index.html").write_text(redirect)
+
+    docs = ROOT / "docs"
+    docs.mkdir(exist_ok=True)
+    (docs / "preview.html").write_text(html)
+    (docs / "index.html").write_text(redirect)
+    (docs / ".nojekyll").write_text("")
+    for rel in (
+        "assets/banner.png",
+        "results/scores.json",
+        "results/raw/run_manifest.json",
+        "preregistry/predictions.yaml",
+    ):
+        source = ROOT / rel
+        target = docs / rel
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(source.read_bytes())
+    print(
+        "wrote preview.html, index.html, docs/preview.html, docs/index.html, "
+        f"assets/data.json ({len(data['predictions'])} claims)"
+    )
 
 
 if __name__ == "__main__":

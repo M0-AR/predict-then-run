@@ -142,6 +142,11 @@ def main() -> None:
         "Repository: [github.com/M0-AR/predict-then-run](https://github.com/M0-AR/predict-then-run)\n"
     )
     lines.append(
+        "Live site: [home](https://m0-ar.github.io/predict-then-run/) · "
+        "[preview.html](https://m0-ar.github.io/predict-then-run/preview.html) · "
+        "[docs/preview.html](https://m0-ar.github.io/predict-then-run/docs/preview.html)\n"
+    )
+    lines.append(
         "A prediction-first benchmark for AI research and product decisions: "
         f"{agg['n_predictions']} claims, a hash-chained ledger, and a scorecard that includes the "
         f"{agg['n_refuted']} predictions that failed. *Working paper; every number is generated from "
@@ -398,14 +403,34 @@ def main() -> None:
 
     lines.append("## Publishing this page\n")
     lines.append(
-        "1. Open the public repository `M0-AR/predict-then-run`.\n"
-        "2. Go to **Settings → Pages → Deploy from a branch**, choose `main` and `/ (root)`.\n"
-        "3. Wait for the Pages build. `index.html` redirects to `preview.html`.\n"
-        "4. Set the repository social preview to `assets/banner.png`.\n"
-        "5. Check the claims table, the quiz and the mobile menu on the published URL.\n"
+        "The site is deployed from `main` / `/ (root)` at "
+        "[m0-ar.github.io/predict-then-run](https://m0-ar.github.io/predict-then-run/):\n"
     )
     lines.append(
-        "The `.nojekyll` file is included so the generated page is served without Jekyll processing.\n"
+        "| URL | What it serves |\n"
+        "|---|---|\n"
+        "| [`/`](https://m0-ar.github.io/predict-then-run/) | Redirects to `/preview.html`. |\n"
+        "| [`/preview.html`](https://m0-ar.github.io/predict-then-run/preview.html) | The main interactive page. |\n"
+        "| [`/docs/preview.html`](https://m0-ar.github.io/predict-then-run/docs/preview.html) | A generated compatibility mirror. |\n"
+        "| [`/docs/`](https://m0-ar.github.io/predict-then-run/docs/) | Redirects to the mirror. |\n"
+    )
+    lines.append(
+        "Keep **Settings → Pages** on `main` / `/ (root)`. `scripts/build_site.py` writes the root "
+        "page and the `docs/` mirror, including the banner, scores, manifest and claims file that "
+        "the page links to. Both `.nojekyll` files prevent Jekyll processing. After a deploy, probe "
+        "the three public paths:\n"
+    )
+    lines.append(
+        "```bash\n"
+        "BASE=https://m0-ar.github.io/predict-then-run\n"
+        "for p in / /preview.html /docs/preview.html; do\n"
+        "  printf '%s -> ' \"$p\"; curl -s -o /dev/null -w '%{http_code}\\n' \"$BASE$p\"\n"
+        "done\n"
+        "```\n"
+    )
+    lines.append(
+        "Set the repository social preview to `assets/banner.png` and check the claims table, the "
+        "quiz and the mobile menu on the published URL.\n"
     )
 
     lines.append("## Abstract\n")

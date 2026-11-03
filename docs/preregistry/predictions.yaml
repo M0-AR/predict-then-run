@@ -1,0 +1,372 @@
+# Pre-registered predictions for the predict-then-run benchmark.
+# Every entry was written before the final multi-seed run and is frozen in
+# preregistry/ledger.jsonl by scripts/freeze.py.  Fields:
+#   kind: directional | threshold
+#   directional: predicted_relative_effect = (treatment - baseline) / baseline
+#   threshold:   measured comparator threshold; predicted_truth is the claim
+#   predicted_interval: the range we expect the measured effect to fall in
+#   confidence: subjective probability that the claim survives the test
+
+- id: E1.P1
+  experiment: e1_weight_decay
+  claim: "Weight decay 0.1 reduces the final weight norm relative to 0.0."
+  kind: directional
+  predicted_relative_effect: -0.03
+  predicted_interval: [-0.10, 0.00]
+  confidence: 0.85
+  falsifier: "The paired 95% CI of the relative weight-norm change includes zero or is positive."
+  citation: "Loshchilov & Hutter, Decoupled Weight Decay Regularization, ICLR 2019, arXiv:1711.05101"
+
+- id: E1.P2
+  experiment: e1_weight_decay
+  claim: "Weight decay 0.1 reduces net weight growth over training relative to 0.0."
+  kind: directional
+  predicted_relative_effect: -0.02
+  predicted_interval: [-0.08, 0.01]
+  confidence: 0.80
+  falsifier: "The paired 95% CI of the relative change in net weight growth includes zero or is positive."
+  citation: "Loshchilov & Hutter, Decoupled Weight Decay Regularization, ICLR 2019, arXiv:1711.05101"
+
+- id: E1.P3
+  experiment: e1_weight_decay
+  claim: "Weight decay 0.1 changes validation loss by less than +2% at this scale."
+  kind: threshold
+  comparator: "<"
+  threshold: 0.02
+  predicted_truth: true
+  predicted_interval: [-0.02, 0.03]
+  confidence: 0.70
+  falsifier: "The 95% CI of the relative validation-loss change lies entirely above +2%."
+  citation: "Loshchilov & Hutter, Decoupled Weight Decay Regularization, ICLR 2019, arXiv:1711.05101"
+
+- id: E1.P4
+  experiment: e1_weight_decay
+  claim: "Weight decay 0.1 increases the final effective learning rate (ELR) because it shrinks the denominator."
+  kind: directional
+  predicted_relative_effect: 0.02
+  predicted_interval: [-0.02, 0.10]
+  confidence: 0.60
+  falsifier: "The paired 95% CI of the relative ELR change includes zero or is negative."
+  citation: "Loshchilov & Hutter, Decoupled Weight Decay Regularization, ICLR 2019, arXiv:1711.05101"
+
+- id: E2.P1
+  experiment: e2_muon
+  claim: "At width 64, Muon's tuned validation loss is lower than AdamW's tuned validation loss."
+  kind: directional
+  predicted_relative_effect: -0.03
+  predicted_interval: [-0.10, 0.02]
+  confidence: 0.60
+  falsifier: "The paired 95% CI of the relative loss difference includes zero or is positive."
+  citation: "Jordan et al., Muon is Scalable for LLM Training, arXiv:2502.16982"
+
+- id: E2.P2
+  experiment: e2_muon
+  claim: "Muon's loss advantage over AdamW grows when width doubles from 64 to 128."
+  kind: threshold
+  comparator: ">"
+  threshold: 0.0
+  predicted_truth: true
+  predicted_interval: [-0.05, 0.15]
+  confidence: 0.65
+  falsifier: "The 95% CI of (advantage at 128 - advantage at 64) lies entirely below zero."
+  citation: "Jordan et al., Muon is Scalable for LLM Training, arXiv:2502.16982"
+
+- id: E2.P3
+  experiment: e2_muon
+  claim: "At width 128, tuned Muon is within 5% of tuned AdamW validation loss (no catastrophic transfer failure)."
+  kind: threshold
+  comparator: "<"
+  threshold: 0.05
+  predicted_truth: true
+  predicted_interval: [-0.15, 0.05]
+  confidence: 0.60
+  falsifier: "The 95% CI of the relative Muon-minus-AdamW loss lies entirely above +5%."
+  citation: "Jordan et al., Muon is Scalable for LLM Training, arXiv:2502.16982"
+
+- id: E3.P1
+  experiment: e3_mtp
+  claim: "Equal-weight multi-token prediction increases next-token validation loss relative to a single-token baseline."
+  kind: directional
+  predicted_relative_effect: 0.01
+  predicted_interval: [0.00, 0.05]
+  confidence: 0.70
+  falsifier: "The paired 95% CI of the relative loss change includes zero or is negative."
+  citation: "How Transformers Learn to Plan via Multi-Token Prediction, arXiv:2604.11912"
+
+- id: E3.P2
+  experiment: e3_mtp
+  claim: "Under equal-weight MTP, the head-1 gradient is less aligned with the head-0 gradient than two ordinary batches are."
+  kind: directional
+  predicted_relative_effect: -0.50
+  predicted_interval: [-1.00, -0.10]
+  confidence: 0.80
+  falsifier: "The paired 95% CI of the relative cosine change includes zero or is positive."
+  citation: "How Transformers Learn to Plan via Multi-Token Prediction, arXiv:2604.11912"
+
+- id: E3.P3
+  experiment: e3_mtp
+  claim: "Downweighting the MTP head to 0.3 reduces next-token validation loss relative to equal weighting."
+  kind: directional
+  predicted_relative_effect: -0.01
+  predicted_interval: [-0.05, 0.00]
+  confidence: 0.75
+  falsifier: "The paired 95% CI of the relative loss change includes zero or is positive."
+  citation: "How Transformers Learn to Plan via Multi-Token Prediction, arXiv:2604.11912"
+
+- id: E3.P4
+  experiment: e3_mtp
+  claim: "Downweighted MTP stays within +1% of the single-token baseline's next-token validation loss."
+  kind: threshold
+  comparator: "<"
+  threshold: 0.01
+  predicted_truth: true
+  predicted_interval: [-0.02, 0.02]
+  confidence: 0.60
+  falsifier: "The 95% CI of the relative loss change lies entirely above +1%."
+  citation: "How Transformers Learn to Plan via Multi-Token Prediction, arXiv:2604.11912"
+
+- id: E3.P5
+  experiment: e3_mtp
+  claim: "Downweighting the MTP head increases the absolute head-1/head-0 gradient cosine relative to equal weighting."
+  kind: threshold
+  comparator: ">"
+  threshold: 0.0
+  predicted_truth: true
+  predicted_interval: [0.00, 0.30]
+  confidence: 0.70
+  falsifier: "The 95% CI of the paired absolute cosine difference lies entirely below zero."
+  citation: "How Transformers Learn to Plan via Multi-Token Prediction, arXiv:2604.11912"
+
+- id: E4.P1
+  experiment: e4_moe
+  claim: "With four experts, top-1 routing and no auxiliary loss, normalized router entropy stays above 0.60 at 300 steps (no collapse)."
+  kind: threshold
+  comparator: ">"
+  threshold: 0.60
+  predicted_truth: true
+  predicted_interval: [0.55, 0.75]
+  confidence: 0.65
+  falsifier: "The 95% CI of normalized entropy lies entirely below 0.60."
+  citation: "Softmax Routing Dynamics in Mixture-of-Experts Models: Collapse and Recovery, arXiv:2610.39442"
+
+- id: E4.P2
+  experiment: e4_moe
+  claim: "An auxiliary load-balancing loss of 0.01 increases normalized router entropy relative to no auxiliary loss."
+  kind: directional
+  predicted_relative_effect: 0.05
+  predicted_interval: [0.00, 0.20]
+  confidence: 0.75
+  falsifier: "The paired 95% CI of the relative entropy change includes zero or is negative."
+  citation: "Softmax Routing Dynamics in Mixture-of-Experts Models: Collapse and Recovery, arXiv:2610.39442"
+
+- id: E4.P3
+  experiment: e4_moe
+  claim: "Expert assignment at step 50 predicts expert assignment at step 300 with correlation above 0.50 (routing persistence)."
+  kind: threshold
+  comparator: ">"
+  threshold: 0.50
+  predicted_truth: true
+  predicted_interval: [0.50, 0.90]
+  confidence: 0.70
+  falsifier: "The 95% CI of the early-late assignment correlation lies entirely below 0.50."
+  citation: "Softmax Routing Dynamics in Mixture-of-Experts Models: Collapse and Recovery, arXiv:2610.39442"
+
+- id: E4.P4
+  experiment: e4_moe
+  claim: "The auxiliary load-balancing loss costs less than +2% validation loss at this scale."
+  kind: threshold
+  comparator: "<"
+  threshold: 0.02
+  predicted_truth: true
+  predicted_interval: [-0.01, 0.03]
+  confidence: 0.60
+  falsifier: "The 95% CI of the relative validation-loss change lies entirely above +2%."
+  citation: "Softmax Routing Dynamics in Mixture-of-Experts Models: Collapse and Recovery, arXiv:2610.39442"
+
+- id: E5.P1
+  experiment: e5_lr_decay
+  claim: "A cosine tail applied over the last 30% of training lowers validation loss relative to a constant learning rate at micro-batch 32."
+  kind: directional
+  predicted_relative_effect: -0.01
+  predicted_interval: [-0.05, 0.00]
+  confidence: 0.70
+  falsifier: "The paired 95% CI of the relative validation-loss change includes zero or is positive."
+  citation: "Kaplan et al., Scaling Laws for Neural Language Models, arXiv:2001.08361; Hoffmann et al., Chinchilla, arXiv:2203.15556"
+
+- id: E5.P2
+  experiment: e5_lr_decay
+  claim: "The validation-loss benefit of the cosine tail is larger at micro-batch 32 than at micro-batch 16 (gradient noise amplifies decay benefit)."
+  kind: threshold
+  comparator: "<"
+  threshold: 0.0
+  predicted_truth: true
+  predicted_interval: [-0.03, 0.00]
+  confidence: 0.60
+  falsifier: "The 95% CI of (benefit at 16 - benefit at 32) lies entirely above zero."
+  citation: "Kaplan et al., Scaling Laws for Neural Language Models, arXiv:2001.08361; Hoffmann et al., Chinchilla, arXiv:2203.15556"
+
+- id: E5.P3
+  experiment: e5_lr_decay
+  claim: "Across micro-batch sizes and seeds, gradient-noise scale correlates positively (r > 0.30) with the validation-loss benefit of the cosine tail."
+  kind: threshold
+  comparator: ">"
+  threshold: 0.30
+  predicted_truth: true
+  predicted_interval: [0.00, 0.80]
+  confidence: 0.55
+  falsifier: "The 95% bootstrap CI of the correlation lies entirely below 0.30."
+  citation: "Kaplan et al., Scaling Laws for Neural Language Models, arXiv:2001.08361; Hoffmann et al., Chinchilla, arXiv:2203.15556"
+
+- id: E6.P1
+  experiment: e6_hints
+  claim: "An external memory table recovers held-out OLD facts that the weights never saw (top-1 accuracy increases by at least 50 percentage points)."
+  kind: directional
+  predicted_relative_effect: 0.80
+  predicted_interval: [0.50, 1.00]
+  confidence: 0.90
+  falsifier: "The paired 95% CI of the top-1 rate difference includes zero or is negative."
+  citation: "DeepSeek Engram: Conditional Memory via Scalable Lookup, arXiv:2601.07372; Sukhbaatar et al., End-To-End Memory Networks, NeurIPS 2015"
+
+- id: E6.P2
+  experiment: e6_hints
+  claim: "The same external memory is stale for NEW facts and lowers NEW-fact top-1 accuracy."
+  kind: directional
+  predicted_relative_effect: -0.20
+  predicted_interval: [-0.50, 0.00]
+  confidence: 0.80
+  falsifier: "The paired 95% CI of the top-1 rate difference includes zero or is positive."
+  citation: "DeepSeek Engram: Conditional Memory via Scalable Lookup, arXiv:2601.07372"
+
+- id: E6.P3
+  experiment: e6_hints
+  claim: "A learned per-token trust gate recovers at least 10 percentage points of NEW-fact top-1 accuracy under the stale memory."
+  kind: directional
+  predicted_relative_effect: 0.30
+  predicted_interval: [0.10, 0.60]
+  confidence: 0.70
+  falsifier: "The paired 95% CI of the top-1 rate difference includes zero or is negative."
+  citation: "DeepSeek Engram: Conditional Memory via Scalable Lookup, arXiv:2601.07372"
+
+- id: E6.P4
+  experiment: e6_hints
+  claim: "The learned gate opens more for OLD (memory) prompts than for NEW (reason) prompts."
+  kind: directional
+  predicted_relative_effect: 0.15
+  predicted_interval: [0.00, 0.40]
+  confidence: 0.65
+  falsifier: "The paired 95% CI of the gate-probability difference includes zero or is negative."
+  citation: "DeepSeek Engram: Conditional Memory via Scalable Lookup, arXiv:2601.07372"
+
+- id: E6.P5
+  experiment: e6_hints
+  claim: "Order-invariant (bag-of-words) memory keys recover reordered OLD queries that the ordered trigram table misses."
+  kind: directional
+  predicted_relative_effect: 0.40
+  predicted_interval: [0.20, 0.80]
+  confidence: 0.75
+  falsifier: "The paired 95% CI of the top-1 rate difference includes zero or is negative."
+  citation: "DeepSeek Engram: Conditional Memory via Scalable Lookup, arXiv:2601.07372"
+
+- id: E6.P6
+  experiment: e6_hints
+  claim: "Even with gating, external memory still improves OLD-fact top-1 accuracy relative to no memory."
+  kind: directional
+  predicted_relative_effect: 0.60
+  predicted_interval: [0.30, 1.00]
+  confidence: 0.80
+  falsifier: "The paired 95% CI of the top-1 rate difference includes zero or is negative."
+  citation: "DeepSeek Engram: Conditional Memory via Scalable Lookup, arXiv:2601.07372"
+
+- id: E6.P7
+  experiment: e6_hints
+  claim: "Naive hint dropout during training recovers at least 10 percentage points of NEW-fact top-1 accuracy when hints are present at evaluation."
+  kind: threshold
+  comparator: ">"
+  threshold: 0.10
+  predicted_truth: true
+  predicted_interval: [0.00, 0.50]
+  confidence: 0.55
+  falsifier: "The 95% CI of the top-1 rate difference lies entirely below +10 percentage points."
+  citation: "Transcript claim under test; cf. DeepSeek Engram, arXiv:2601.07372"
+
+- id: E6.P8
+  experiment: e6_hints
+  claim: "The learned gate leaves a residual stale-memory penalty on NEW facts: accuracy with hints on is at least 20 percentage points below accuracy with hints off."
+  kind: threshold
+  comparator: "<"
+  threshold: -0.20
+  predicted_truth: true
+  predicted_interval: [-0.60, -0.20]
+  confidence: 0.65
+  falsifier: "The 95% CI of (NEW with hints on - NEW with hints off) lies entirely above -20 percentage points."
+  citation: "DeepSeek Engram: Conditional Memory via Scalable Lookup, arXiv:2601.07372"
+
+- id: E6.P9
+  experiment: e6_hints
+  claim: "The learned gate beats naive hint dropout on NEW facts when hints are present."
+  kind: directional
+  predicted_relative_effect: 0.30
+  predicted_interval: [0.10, 0.60]
+  confidence: 0.70
+  falsifier: "The paired 95% CI of the top-1 rate difference includes zero or is negative."
+  citation: "DeepSeek Engram: Conditional Memory via Scalable Lookup, arXiv:2601.07372"
+
+- id: M1
+  experiment: market
+  claim: "Walk-forward SPY directional accuracy is below 55% (no strong linear predictability after costs)."
+  kind: threshold
+  comparator: "<"
+  threshold: 0.55
+  predicted_truth: true
+  predicted_interval: [0.45, 0.55]
+  confidence: 0.80
+  falsifier: "The 95% bootstrap CI of directional accuracy lies entirely above 55%."
+  citation: "Fama & French, Luck versus Skill in the Cross-Section of Mutual Fund Returns, Journal of Finance 2010"
+
+- id: M2
+  experiment: market
+  claim: "The walk-forward linear model does not improve MSE over a zero-return forecast (skill < 1%)."
+  kind: threshold
+  comparator: "<"
+  threshold: 0.01
+  predicted_truth: true
+  predicted_interval: [-0.05, 0.01]
+  confidence: 0.75
+  falsifier: "The 95% bootstrap CI of MSE skill lies entirely above 1%."
+  citation: "Bailey et al., The Probability of Backtest Overfitting, Journal of Computational Finance 2017"
+
+- id: M3
+  experiment: market
+  claim: "The absolute walk-forward Sharpe ratio after 1 bp costs is below 1.0."
+  kind: threshold
+  comparator: "<"
+  threshold: 1.0
+  predicted_truth: true
+  predicted_interval: [0.0, 1.0]
+  confidence: 0.80
+  falsifier: "The 95% bootstrap CI of the absolute Sharpe ratio lies entirely above 1.0."
+  citation: "Bailey et al., The Deflated Sharpe Ratio, Journal of Portfolio Management 2014"
+
+- id: M4
+  experiment: market
+  claim: "SPY absolute returns show volatility clustering: lag-1 autocorrelation of |returns| exceeds 0.05."
+  kind: threshold
+  comparator: ">"
+  threshold: 0.05
+  predicted_truth: true
+  predicted_interval: [0.10, 0.50]
+  confidence: 0.90
+  falsifier: "The 95% bootstrap CI of the lag-1 autocorrelation lies entirely below 0.05."
+  citation: "Cont, Empirical Properties of Asset Returns: Stylized Facts and Statistical Issues, Quantitative Finance 2001"
+
+- id: M5
+  experiment: market
+  claim: "The shuffled-label control's directional accuracy is within 0.05 of 50%, confirming the absence of leakage."
+  kind: threshold
+  comparator: "<"
+  threshold: 0.05
+  predicted_truth: true
+  predicted_interval: [0.00, 0.05]
+  confidence: 0.85
+  falsifier: "The 95% bootstrap CI of |accuracy - 0.5| lies entirely above 0.05."
+  citation: "Bailey et al., The Probability of Backtest Overfitting, Journal of Computational Finance 2017"
