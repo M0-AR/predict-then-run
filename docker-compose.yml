@@ -1,0 +1,18 @@
+services:
+  benchmark:
+    build: .
+    image: predict-then-run:latest
+    working_dir: /app
+    volumes:
+      - ./results:/app/results
+      - ./data:/app/data
+      - ./README.md:/app/README.md
+    environment:
+      - PTR_SEEDS=${PTR_SEEDS:-0,1,2,3,4}
+      - PTR_STEPS=${PTR_STEPS:-300}
+      - PTR_EXPERIMENTS=${PTR_EXPERIMENTS:-e1,e2,e3,e4,e5,e6,market}
+    command: >
+      bash -lc "ptr verify &&
+      python scripts/run_all.py --experiments $$PTR_EXPERIMENTS --seeds $$PTR_SEEDS --steps $$PTR_STEPS &&
+      python scripts/score.py &&
+      python scripts/render_readme.py"

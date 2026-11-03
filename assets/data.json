@@ -1,0 +1,938 @@
+{
+  "generated": "2026-11-03T12:02:58.192187+00:00",
+  "aggregate": {
+    "n_predictions": 33,
+    "n_decided": 22,
+    "n_confirmed": 17,
+    "n_refuted": 5,
+    "n_inconclusive": 11,
+    "brier": 0.14829545454545454,
+    "brier_skill_vs_half": 0.40681818181818186,
+    "log_loss": 0.46650166844871327,
+    "interval_coverage": 0.696969696969697,
+    "mean_absolute_error": 0.23877763397119295,
+    "mean_relative_error": 0.7191784620461142,
+    "sign_accuracy": 0.8888888888888888
+  },
+  "ledger": {
+    "entries": 33,
+    "head": "2413197af3874fe196c4024ed9cf8cf437eb49d313b8395e7164004bbba836e7",
+    "valid": true
+  },
+  "manifest": {
+    "seconds": 720.582670211792,
+    "minutes": 12.0,
+    "python": "3.12.13",
+    "torch": "2.13.0+cu130",
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "steps": 300,
+    "finished_utc": "2026-11-03T12:02:56.882781+00:00"
+  },
+  "calibration": [
+    {
+      "lo": 0.4,
+      "hi": 0.6000000000000001,
+      "n": 5,
+      "mean_confidence": 0.5799999999999998,
+      "empirical_accuracy": 0.4
+    },
+    {
+      "lo": 0.6000000000000001,
+      "hi": 0.8,
+      "n": 9,
+      "mean_confidence": 0.6944444444444444,
+      "empirical_accuracy": 0.8888888888888888
+    },
+    {
+      "lo": 0.8,
+      "hi": 1.0,
+      "n": 8,
+      "mean_confidence": 0.8375,
+      "empirical_accuracy": 0.875
+    }
+  ],
+  "predictions": [
+    {
+      "id": "E1.P1",
+      "experiment": "e1_weight_decay",
+      "claim": "Weight decay 0.1 reduces the final weight norm relative to 0.0.",
+      "kind": "directional",
+      "confidence": 0.85,
+      "predicted_label": "−0.030",
+      "predicted_value": -0.03,
+      "predicted_interval": [
+        -0.1,
+        0.0
+      ],
+      "falsifier": "The paired 95% CI of the relative weight-norm change includes zero or is positive.",
+      "citation": "Loshchilov & Hutter, Decoupled Weight Decay Regularization, ICLR 2019, arXiv:1711.05101",
+      "measured": -0.02590180758698262,
+      "ci_low": -0.02688000598278217,
+      "ci_high": -0.024923609191183076,
+      "verdict": "CONFIRMED",
+      "sign_match": true,
+      "interval_covered": true,
+      "absolute_error": 0.004098192413017378
+    },
+    {
+      "id": "E1.P2",
+      "experiment": "e1_weight_decay",
+      "claim": "Weight decay 0.1 reduces net weight growth over training relative to 0.0.",
+      "kind": "directional",
+      "confidence": 0.8,
+      "predicted_label": "−0.020",
+      "predicted_value": -0.02,
+      "predicted_interval": [
+        -0.08,
+        0.01
+      ],
+      "falsifier": "The paired 95% CI of the relative change in net weight growth includes zero or is positive.",
+      "citation": "Loshchilov & Hutter, Decoupled Weight Decay Regularization, ICLR 2019, arXiv:1711.05101",
+      "measured": -0.017639502191086256,
+      "ci_low": -0.018874047662177335,
+      "ci_high": -0.016235897486455843,
+      "verdict": "CONFIRMED",
+      "sign_match": true,
+      "interval_covered": true,
+      "absolute_error": 0.0023604978089137446
+    },
+    {
+      "id": "E1.P3",
+      "experiment": "e1_weight_decay",
+      "claim": "Weight decay 0.1 changes validation loss by less than +2% at this scale.",
+      "kind": "threshold",
+      "confidence": 0.7,
+      "predicted_label": "metric < 0.02",
+      "predicted_value": null,
+      "predicted_interval": [
+        -0.02,
+        0.03
+      ],
+      "falsifier": "The 95% CI of the relative validation-loss change lies entirely above +2%.",
+      "citation": "Loshchilov & Hutter, Decoupled Weight Decay Regularization, ICLR 2019, arXiv:1711.05101",
+      "measured": 0.005217198219506963,
+      "ci_low": 0.003743041677176818,
+      "ci_high": 0.006731462970616925,
+      "verdict": "CONFIRMED",
+      "sign_match": null,
+      "interval_covered": true,
+      "absolute_error": 0.014782801780493036
+    },
+    {
+      "id": "E1.P4",
+      "experiment": "e1_weight_decay",
+      "claim": "Weight decay 0.1 increases the final effective learning rate (ELR) because it shrinks the denominator.",
+      "kind": "directional",
+      "confidence": 0.6,
+      "predicted_label": "+0.020",
+      "predicted_value": 0.02,
+      "predicted_interval": [
+        -0.02,
+        0.1
+      ],
+      "falsifier": "The paired 95% CI of the relative ELR change includes zero or is negative.",
+      "citation": "Loshchilov & Hutter, Decoupled Weight Decay Regularization, ICLR 2019, arXiv:1711.05101",
+      "measured": 0.014237900526881503,
+      "ci_low": -0.009441696777100236,
+      "ci_high": 0.036944156703403945,
+      "verdict": "INCONCLUSIVE",
+      "sign_match": true,
+      "interval_covered": true,
+      "absolute_error": 0.005762099473118497
+    },
+    {
+      "id": "E2.P1",
+      "experiment": "e2_muon",
+      "claim": "At width 64, Muon's tuned validation loss is lower than AdamW's tuned validation loss.",
+      "kind": "directional",
+      "confidence": 0.6,
+      "predicted_label": "−0.030",
+      "predicted_value": -0.03,
+      "predicted_interval": [
+        -0.1,
+        0.02
+      ],
+      "falsifier": "The paired 95% CI of the relative loss difference includes zero or is positive.",
+      "citation": "Jordan et al., Muon is Scalable for LLM Training, arXiv:2502.16982",
+      "measured": -0.22395179464311357,
+      "ci_low": -0.24738295368032567,
+      "ci_high": -0.20499347758880995,
+      "verdict": "CONFIRMED",
+      "sign_match": true,
+      "interval_covered": false,
+      "absolute_error": 0.19395179464311357
+    },
+    {
+      "id": "E2.P2",
+      "experiment": "e2_muon",
+      "claim": "Muon's loss advantage over AdamW grows when width doubles from 64 to 128.",
+      "kind": "threshold",
+      "confidence": 0.65,
+      "predicted_label": "metric > 0",
+      "predicted_value": null,
+      "predicted_interval": [
+        -0.05,
+        0.15
+      ],
+      "falsifier": "The 95% CI of (advantage at 128 - advantage at 64) lies entirely below zero.",
+      "citation": "Jordan et al., Muon is Scalable for LLM Training, arXiv:2502.16982",
+      "measured": 0.10111879855394364,
+      "ci_low": 0.03416498899459839,
+      "ci_high": 0.1531737357378006,
+      "verdict": "CONFIRMED",
+      "sign_match": null,
+      "interval_covered": true,
+      "absolute_error": 0.10111879855394364
+    },
+    {
+      "id": "E2.P3",
+      "experiment": "e2_muon",
+      "claim": "At width 128, tuned Muon is within 5% of tuned AdamW validation loss (no catastrophic transfer failure).",
+      "kind": "threshold",
+      "confidence": 0.6,
+      "predicted_label": "metric < 0.05",
+      "predicted_value": null,
+      "predicted_interval": [
+        -0.15,
+        0.05
+      ],
+      "falsifier": "The 95% CI of the relative Muon-minus-AdamW loss lies entirely above +5%.",
+      "citation": "Jordan et al., Muon is Scalable for LLM Training, arXiv:2502.16982",
+      "measured": -0.2832156209966253,
+      "ci_low": -0.2903839058526719,
+      "ci_high": -0.2755537551976377,
+      "verdict": "CONFIRMED",
+      "sign_match": null,
+      "interval_covered": false,
+      "absolute_error": 0.3332156209966253
+    },
+    {
+      "id": "E3.P1",
+      "experiment": "e3_mtp",
+      "claim": "Equal-weight multi-token prediction increases next-token validation loss relative to a single-token baseline.",
+      "kind": "directional",
+      "confidence": 0.7,
+      "predicted_label": "+0.010",
+      "predicted_value": 0.01,
+      "predicted_interval": [
+        0.0,
+        0.05
+      ],
+      "falsifier": "The paired 95% CI of the relative loss change includes zero or is negative.",
+      "citation": "How Transformers Learn to Plan via Multi-Token Prediction, arXiv:2604.11912",
+      "measured": 0.0045373367369208484,
+      "ci_low": -0.009789184786701441,
+      "ci_high": 0.01852095874544596,
+      "verdict": "INCONCLUSIVE",
+      "sign_match": true,
+      "interval_covered": true,
+      "absolute_error": 0.005462663263079152
+    },
+    {
+      "id": "E3.P2",
+      "experiment": "e3_mtp",
+      "claim": "Under equal-weight MTP, the head-1 gradient is less aligned with the head-0 gradient than two ordinary batches are.",
+      "kind": "directional",
+      "confidence": 0.8,
+      "predicted_label": "−0.500",
+      "predicted_value": -0.5,
+      "predicted_interval": [
+        -1.0,
+        -0.1
+      ],
+      "falsifier": "The paired 95% CI of the relative cosine change includes zero or is positive.",
+      "citation": "How Transformers Learn to Plan via Multi-Token Prediction, arXiv:2604.11912",
+      "measured": 1.9166581715143656,
+      "ci_low": 1.0320734466987256,
+      "ci_high": 2.9933468136507018,
+      "verdict": "REFUTED",
+      "sign_match": false,
+      "interval_covered": false,
+      "absolute_error": 2.4166581715143653
+    },
+    {
+      "id": "E3.P3",
+      "experiment": "e3_mtp",
+      "claim": "Downweighting the MTP head to 0.3 reduces next-token validation loss relative to equal weighting.",
+      "kind": "directional",
+      "confidence": 0.75,
+      "predicted_label": "−0.010",
+      "predicted_value": -0.01,
+      "predicted_interval": [
+        -0.05,
+        0.0
+      ],
+      "falsifier": "The paired 95% CI of the relative loss change includes zero or is positive.",
+      "citation": "How Transformers Learn to Plan via Multi-Token Prediction, arXiv:2604.11912",
+      "measured": -0.008834421261698103,
+      "ci_low": -0.020468623361454222,
+      "ci_high": 0.00032317552251259014,
+      "verdict": "INCONCLUSIVE",
+      "sign_match": true,
+      "interval_covered": true,
+      "absolute_error": 0.0011655787383018975
+    },
+    {
+      "id": "E3.P4",
+      "experiment": "e3_mtp",
+      "claim": "Downweighted MTP stays within +1% of the single-token baseline's next-token validation loss.",
+      "kind": "threshold",
+      "confidence": 0.6,
+      "predicted_label": "metric < 0.01",
+      "predicted_value": null,
+      "predicted_interval": [
+        -0.02,
+        0.02
+      ],
+      "falsifier": "The 95% CI of the relative loss change lies entirely above +1%.",
+      "citation": "How Transformers Learn to Plan via Multi-Token Prediction, arXiv:2604.11912",
+      "measured": -0.004337169268917392,
+      "ci_low": -0.02767056104385186,
+      "ci_high": 0.01642740895837272,
+      "verdict": "INCONCLUSIVE",
+      "sign_match": null,
+      "interval_covered": true,
+      "absolute_error": 0.014337169268917392
+    },
+    {
+      "id": "E3.P5",
+      "experiment": "e3_mtp",
+      "claim": "Downweighting the MTP head increases the absolute head-1/head-0 gradient cosine relative to equal weighting.",
+      "kind": "threshold",
+      "confidence": 0.7,
+      "predicted_label": "metric > 0",
+      "predicted_value": null,
+      "predicted_interval": [
+        0.0,
+        0.3
+      ],
+      "falsifier": "The 95% CI of the paired absolute cosine difference lies entirely below zero.",
+      "citation": "How Transformers Learn to Plan via Multi-Token Prediction, arXiv:2604.11912",
+      "measured": -0.21831463426351547,
+      "ci_low": -0.5031803745776415,
+      "ci_high": 0.1641658153384924,
+      "verdict": "INCONCLUSIVE",
+      "sign_match": null,
+      "interval_covered": false,
+      "absolute_error": 0.21831463426351547
+    },
+    {
+      "id": "E4.P1",
+      "experiment": "e4_moe",
+      "claim": "With four experts, top-1 routing and no auxiliary loss, normalized router entropy stays above 0.60 at 300 steps (no collapse).",
+      "kind": "threshold",
+      "confidence": 0.65,
+      "predicted_label": "metric > 0.6",
+      "predicted_value": null,
+      "predicted_interval": [
+        0.55,
+        0.75
+      ],
+      "falsifier": "The 95% CI of normalized entropy lies entirely below 0.60.",
+      "citation": "Softmax Routing Dynamics in Mixture-of-Experts Models: Collapse and Recovery, arXiv:2610.39442",
+      "measured": 0.6809742420231918,
+      "ci_low": 0.6575173849531377,
+      "ci_high": 0.6939053882313653,
+      "verdict": "CONFIRMED",
+      "sign_match": null,
+      "interval_covered": true,
+      "absolute_error": 0.08097424202319181
+    },
+    {
+      "id": "E4.P2",
+      "experiment": "e4_moe",
+      "claim": "An auxiliary load-balancing loss of 0.01 increases normalized router entropy relative to no auxiliary loss.",
+      "kind": "directional",
+      "confidence": 0.75,
+      "predicted_label": "+0.050",
+      "predicted_value": 0.05,
+      "predicted_interval": [
+        0.0,
+        0.2
+      ],
+      "falsifier": "The paired 95% CI of the relative entropy change includes zero or is negative.",
+      "citation": "Softmax Routing Dynamics in Mixture-of-Experts Models: Collapse and Recovery, arXiv:2610.39442",
+      "measured": 0.05874251534363736,
+      "ci_low": 0.03967465931824615,
+      "ci_high": 0.09360061539777262,
+      "verdict": "CONFIRMED",
+      "sign_match": true,
+      "interval_covered": true,
+      "absolute_error": 0.008742515343637354
+    },
+    {
+      "id": "E4.P3",
+      "experiment": "e4_moe",
+      "claim": "Expert assignment at step 50 predicts expert assignment at step 300 with correlation above 0.50 (routing persistence).",
+      "kind": "threshold",
+      "confidence": 0.7,
+      "predicted_label": "metric > 0.5",
+      "predicted_value": null,
+      "predicted_interval": [
+        0.5,
+        0.9
+      ],
+      "falsifier": "The 95% CI of the early-late assignment correlation lies entirely below 0.50.",
+      "citation": "Softmax Routing Dynamics in Mixture-of-Experts Models: Collapse and Recovery, arXiv:2610.39442",
+      "measured": 0.5967500780022403,
+      "ci_low": 0.5540480713370238,
+      "ci_high": 0.6450816085109967,
+      "verdict": "CONFIRMED",
+      "sign_match": null,
+      "interval_covered": true,
+      "absolute_error": 0.09675007800224034
+    },
+    {
+      "id": "E4.P4",
+      "experiment": "e4_moe",
+      "claim": "The auxiliary load-balancing loss costs less than +2% validation loss at this scale.",
+      "kind": "threshold",
+      "confidence": 0.6,
+      "predicted_label": "metric < 0.02",
+      "predicted_value": null,
+      "predicted_interval": [
+        -0.01,
+        0.03
+      ],
+      "falsifier": "The 95% CI of the relative validation-loss change lies entirely above +2%.",
+      "citation": "Softmax Routing Dynamics in Mixture-of-Experts Models: Collapse and Recovery, arXiv:2610.39442",
+      "measured": 0.01880752295925213,
+      "ci_low": 0.0052578304298855705,
+      "ci_high": 0.028261741053906653,
+      "verdict": "INCONCLUSIVE",
+      "sign_match": null,
+      "interval_covered": true,
+      "absolute_error": 0.0011924770407478712
+    },
+    {
+      "id": "E5.P1",
+      "experiment": "e5_lr_decay",
+      "claim": "A cosine tail applied over the last 30% of training lowers validation loss relative to a constant learning rate at micro-batch 32.",
+      "kind": "directional",
+      "confidence": 0.7,
+      "predicted_label": "−0.010",
+      "predicted_value": -0.01,
+      "predicted_interval": [
+        -0.05,
+        0.0
+      ],
+      "falsifier": "The paired 95% CI of the relative validation-loss change includes zero or is positive.",
+      "citation": "Kaplan et al., Scaling Laws for Neural Language Models, arXiv:2001.08361; Hoffmann et al., Chinchilla, arXiv:2203.15556",
+      "measured": 0.0029677370753318695,
+      "ci_low": -0.004680617065915773,
+      "ci_high": 0.01061609121657951,
+      "verdict": "INCONCLUSIVE",
+      "sign_match": false,
+      "interval_covered": false,
+      "absolute_error": 0.01296773707533187
+    },
+    {
+      "id": "E5.P2",
+      "experiment": "e5_lr_decay",
+      "claim": "The validation-loss benefit of the cosine tail is larger at micro-batch 32 than at micro-batch 16 (gradient noise amplifies decay benefit).",
+      "kind": "threshold",
+      "confidence": 0.6,
+      "predicted_label": "metric < 0",
+      "predicted_value": null,
+      "predicted_interval": [
+        -0.03,
+        0.0
+      ],
+      "falsifier": "The 95% CI of (benefit at 16 - benefit at 32) lies entirely above zero.",
+      "citation": "Kaplan et al., Scaling Laws for Neural Language Models, arXiv:2001.08361; Hoffmann et al., Chinchilla, arXiv:2203.15556",
+      "measured": 0.021066172420978545,
+      "ci_low": 0.005362842977046966,
+      "ci_high": 0.036715535819530486,
+      "verdict": "REFUTED",
+      "sign_match": null,
+      "interval_covered": false,
+      "absolute_error": 0.021066172420978545
+    },
+    {
+      "id": "E5.P3",
+      "experiment": "e5_lr_decay",
+      "claim": "Across micro-batch sizes and seeds, gradient-noise scale correlates positively (r > 0.30) with the validation-loss benefit of the cosine tail.",
+      "kind": "threshold",
+      "confidence": 0.55,
+      "predicted_label": "metric > 0.3",
+      "predicted_value": null,
+      "predicted_interval": [
+        0.0,
+        0.8
+      ],
+      "falsifier": "The 95% bootstrap CI of the correlation lies entirely below 0.30.",
+      "citation": "Kaplan et al., Scaling Laws for Neural Language Models, arXiv:2001.08361; Hoffmann et al., Chinchilla, arXiv:2203.15556",
+      "measured": -0.7310778799845967,
+      "ci_low": -0.8997972837718623,
+      "ci_high": -0.49353523878451216,
+      "verdict": "REFUTED",
+      "sign_match": null,
+      "interval_covered": false,
+      "absolute_error": 1.0310778799845968
+    },
+    {
+      "id": "E6.P1",
+      "experiment": "e6_hints",
+      "claim": "An external memory table recovers held-out OLD facts that the weights never saw (top-1 accuracy increases by at least 50 percentage points).",
+      "kind": "directional",
+      "confidence": 0.9,
+      "predicted_label": "+0.800",
+      "predicted_value": 0.8,
+      "predicted_interval": [
+        0.5,
+        1.0
+      ],
+      "falsifier": "The paired 95% CI of the top-1 rate difference includes zero or is negative.",
+      "citation": "DeepSeek Engram: Conditional Memory via Scalable Lookup, arXiv:2601.07372; Sukhbaatar et al., End-To-End Memory Networks, NeurIPS 2015",
+      "measured": 1.0,
+      "ci_low": 1.0,
+      "ci_high": 1.0,
+      "verdict": "CONFIRMED",
+      "sign_match": true,
+      "interval_covered": true,
+      "absolute_error": 0.19999999999999996
+    },
+    {
+      "id": "E6.P2",
+      "experiment": "e6_hints",
+      "claim": "The same external memory is stale for NEW facts and lowers NEW-fact top-1 accuracy.",
+      "kind": "directional",
+      "confidence": 0.8,
+      "predicted_label": "−0.200",
+      "predicted_value": -0.2,
+      "predicted_interval": [
+        -0.5,
+        0.0
+      ],
+      "falsifier": "The paired 95% CI of the top-1 rate difference includes zero or is positive.",
+      "citation": "DeepSeek Engram: Conditional Memory via Scalable Lookup, arXiv:2601.07372",
+      "measured": -0.016666666666666666,
+      "ci_low": -0.05000000000000001,
+      "ci_high": 0.0,
+      "verdict": "INCONCLUSIVE",
+      "sign_match": true,
+      "interval_covered": true,
+      "absolute_error": 0.18333333333333335
+    },
+    {
+      "id": "E6.P3",
+      "experiment": "e6_hints",
+      "claim": "A learned per-token trust gate recovers at least 10 percentage points of NEW-fact top-1 accuracy under the stale memory.",
+      "kind": "directional",
+      "confidence": 0.7,
+      "predicted_label": "+0.300",
+      "predicted_value": 0.3,
+      "predicted_interval": [
+        0.1,
+        0.6
+      ],
+      "falsifier": "The paired 95% CI of the top-1 rate difference includes zero or is negative.",
+      "citation": "DeepSeek Engram: Conditional Memory via Scalable Lookup, arXiv:2601.07372",
+      "measured": 0.13333333333333333,
+      "ci_low": 0.05000000000000001,
+      "ci_high": 0.20000000000000004,
+      "verdict": "CONFIRMED",
+      "sign_match": true,
+      "interval_covered": true,
+      "absolute_error": 0.16666666666666666
+    },
+    {
+      "id": "E6.P4",
+      "experiment": "e6_hints",
+      "claim": "The learned gate opens more for OLD (memory) prompts than for NEW (reason) prompts.",
+      "kind": "directional",
+      "confidence": 0.65,
+      "predicted_label": "+0.150",
+      "predicted_value": 0.15,
+      "predicted_interval": [
+        0.0,
+        0.4
+      ],
+      "falsifier": "The paired 95% CI of the gate-probability difference includes zero or is negative.",
+      "citation": "DeepSeek Engram: Conditional Memory via Scalable Lookup, arXiv:2601.07372",
+      "measured": 0.02621662545595124,
+      "ci_low": -0.006898538341920356,
+      "ci_high": 0.08352107158352735,
+      "verdict": "INCONCLUSIVE",
+      "sign_match": true,
+      "interval_covered": true,
+      "absolute_error": 0.12378337454404875
+    },
+    {
+      "id": "E6.P5",
+      "experiment": "e6_hints",
+      "claim": "Order-invariant (bag-of-words) memory keys recover reordered OLD queries that the ordered trigram table misses.",
+      "kind": "directional",
+      "confidence": 0.75,
+      "predicted_label": "+0.400",
+      "predicted_value": 0.4,
+      "predicted_interval": [
+        0.2,
+        0.8
+      ],
+      "falsifier": "The paired 95% CI of the top-1 rate difference includes zero or is negative.",
+      "citation": "DeepSeek Engram: Conditional Memory via Scalable Lookup, arXiv:2601.07372",
+      "measured": 0.049999999999999996,
+      "ci_low": 0.0,
+      "ci_high": 0.15,
+      "verdict": "INCONCLUSIVE",
+      "sign_match": true,
+      "interval_covered": false,
+      "absolute_error": 0.35000000000000003
+    },
+    {
+      "id": "E6.P6",
+      "experiment": "e6_hints",
+      "claim": "Even with gating, external memory still improves OLD-fact top-1 accuracy relative to no memory.",
+      "kind": "directional",
+      "confidence": 0.8,
+      "predicted_label": "+0.600",
+      "predicted_value": 0.6,
+      "predicted_interval": [
+        0.3,
+        1.0
+      ],
+      "falsifier": "The paired 95% CI of the top-1 rate difference includes zero or is negative.",
+      "citation": "DeepSeek Engram: Conditional Memory via Scalable Lookup, arXiv:2601.07372",
+      "measured": 0.08333333333333333,
+      "ci_low": 0.05000000000000001,
+      "ci_high": 0.15,
+      "verdict": "CONFIRMED",
+      "sign_match": true,
+      "interval_covered": false,
+      "absolute_error": 0.5166666666666666
+    },
+    {
+      "id": "E6.P7",
+      "experiment": "e6_hints",
+      "claim": "Naive hint dropout during training recovers at least 10 percentage points of NEW-fact top-1 accuracy when hints are present at evaluation.",
+      "kind": "threshold",
+      "confidence": 0.55,
+      "predicted_label": "metric > 0.1",
+      "predicted_value": null,
+      "predicted_interval": [
+        0.0,
+        0.5
+      ],
+      "falsifier": "The 95% CI of the top-1 rate difference lies entirely below +10 percentage points.",
+      "citation": "Transcript claim under test; cf. DeepSeek Engram, arXiv:2601.07372",
+      "measured": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "verdict": "REFUTED",
+      "sign_match": null,
+      "interval_covered": true,
+      "absolute_error": 0.1
+    },
+    {
+      "id": "E6.P8",
+      "experiment": "e6_hints",
+      "claim": "The learned gate leaves a residual stale-memory penalty on NEW facts: accuracy with hints on is at least 20 percentage points below accuracy with hints off.",
+      "kind": "threshold",
+      "confidence": 0.65,
+      "predicted_label": "metric < -0.2",
+      "predicted_value": null,
+      "predicted_interval": [
+        -0.6,
+        -0.2
+      ],
+      "falsifier": "The 95% CI of (NEW with hints on - NEW with hints off) lies entirely above -20 percentage points.",
+      "citation": "DeepSeek Engram: Conditional Memory via Scalable Lookup, arXiv:2601.07372",
+      "measured": 0.0,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "verdict": "REFUTED",
+      "sign_match": null,
+      "interval_covered": false,
+      "absolute_error": 0.2
+    },
+    {
+      "id": "E6.P9",
+      "experiment": "e6_hints",
+      "claim": "The learned gate beats naive hint dropout on NEW facts when hints are present.",
+      "kind": "directional",
+      "confidence": 0.7,
+      "predicted_label": "+0.300",
+      "predicted_value": 0.3,
+      "predicted_interval": [
+        0.1,
+        0.6
+      ],
+      "falsifier": "The paired 95% CI of the top-1 rate difference includes zero or is negative.",
+      "citation": "DeepSeek Engram: Conditional Memory via Scalable Lookup, arXiv:2601.07372",
+      "measured": 0.13333333333333333,
+      "ci_low": 0.05000000000000001,
+      "ci_high": 0.20000000000000004,
+      "verdict": "CONFIRMED",
+      "sign_match": true,
+      "interval_covered": true,
+      "absolute_error": 0.16666666666666666
+    },
+    {
+      "id": "M1",
+      "experiment": "market",
+      "claim": "Walk-forward SPY directional accuracy is below 55% (no strong linear predictability after costs).",
+      "kind": "threshold",
+      "confidence": 0.8,
+      "predicted_label": "metric < 0.55",
+      "predicted_value": null,
+      "predicted_interval": [
+        0.45,
+        0.55
+      ],
+      "falsifier": "The 95% bootstrap CI of directional accuracy lies entirely above 55%.",
+      "citation": "Fama & French, Luck versus Skill in the Cross-Section of Mutual Fund Returns, Journal of Finance 2010",
+      "measured": 0.48994638069705093,
+      "ci_low": 0.4651474530831099,
+      "ci_high": 0.5154155495978552,
+      "verdict": "CONFIRMED",
+      "sign_match": null,
+      "interval_covered": true,
+      "absolute_error": 0.06005361930294911
+    },
+    {
+      "id": "M2",
+      "experiment": "market",
+      "claim": "The walk-forward linear model does not improve MSE over a zero-return forecast (skill < 1%).",
+      "kind": "threshold",
+      "confidence": 0.75,
+      "predicted_label": "metric < 0.01",
+      "predicted_value": null,
+      "predicted_interval": [
+        -0.05,
+        0.01
+      ],
+      "falsifier": "The 95% bootstrap CI of MSE skill lies entirely above 1%.",
+      "citation": "Bailey et al., The Probability of Backtest Overfitting, Journal of Computational Finance 2017",
+      "measured": -0.03212114733341154,
+      "ci_low": -0.05905814000094231,
+      "ci_high": -0.00508602668220848,
+      "verdict": "CONFIRMED",
+      "sign_match": null,
+      "interval_covered": true,
+      "absolute_error": 0.04212114733341154
+    },
+    {
+      "id": "M3",
+      "experiment": "market",
+      "claim": "The absolute walk-forward Sharpe ratio after 1 bp costs is below 1.0.",
+      "kind": "threshold",
+      "confidence": 0.8,
+      "predicted_label": "metric < 1",
+      "predicted_value": null,
+      "predicted_interval": [
+        0.0,
+        1.0
+      ],
+      "falsifier": "The 95% bootstrap CI of the absolute Sharpe ratio lies entirely above 1.0.",
+      "citation": "Bailey et al., The Deflated Sharpe Ratio, Journal of Portfolio Management 2014",
+      "measured": 0.14869734864524026,
+      "ci_low": 0.012901595395298794,
+      "ci_high": 1.0112753967217112,
+      "verdict": "INCONCLUSIVE",
+      "sign_match": null,
+      "interval_covered": true,
+      "absolute_error": 0.8513026513547597
+    },
+    {
+      "id": "M4",
+      "experiment": "market",
+      "claim": "SPY absolute returns show volatility clustering: lag-1 autocorrelation of |returns| exceeds 0.05.",
+      "kind": "threshold",
+      "confidence": 0.9,
+      "predicted_label": "metric > 0.05",
+      "predicted_value": null,
+      "predicted_interval": [
+        0.1,
+        0.5
+      ],
+      "falsifier": "The 95% bootstrap CI of the lag-1 autocorrelation lies entirely below 0.05.",
+      "citation": "Cont, Empirical Properties of Asset Returns: Stylized Facts and Statistical Issues, Quantitative Finance 2001",
+      "measured": 0.3584198770070521,
+      "ci_low": 0.26592194054571816,
+      "ci_high": 0.4464104170140655,
+      "verdict": "CONFIRMED",
+      "sign_match": null,
+      "interval_covered": true,
+      "absolute_error": 0.3084198770070521
+    },
+    {
+      "id": "M5",
+      "experiment": "market",
+      "claim": "The shuffled-label control's directional accuracy is within 0.05 of 50%, confirming the absence of leakage.",
+      "kind": "threshold",
+      "confidence": 0.85,
+      "predicted_label": "metric < 0.05",
+      "predicted_value": null,
+      "predicted_interval": [
+        0.0,
+        0.05
+      ],
+      "falsifier": "The 95% bootstrap CI of |accuracy - 0.5| lies entirely above 0.05.",
+      "citation": "Bailey et al., The Probability of Backtest Overfitting, Journal of Computational Finance 2017",
+      "measured": 0.0033512064343163006,
+      "ci_low": 0.0006702412868632157,
+      "ci_high": 0.029490616621983934,
+      "verdict": "CONFIRMED",
+      "sign_match": null,
+      "interval_covered": true,
+      "absolute_error": 0.0466487935656837
+    }
+  ],
+  "experiments": [
+    {
+      "id": "e1",
+      "code": "E1",
+      "name": "Weight decay",
+      "question": "Does weight decay do at tiny scale what the literature says?",
+      "headline": "Weight norm 5.562 → 5.418",
+      "detail": "Validation loss 2.048 → 2.059. The direction was right; the size was smaller than predicted.",
+      "seconds": 87.52224349975586,
+      "counts": {
+        "total": 4,
+        "confirmed": 3,
+        "refuted": 0,
+        "inconclusive": 1
+      }
+    },
+    {
+      "id": "e2",
+      "code": "E2",
+      "name": "Muon vs AdamW",
+      "question": "Does Muon beat AdamW under a matched tuning budget?",
+      "headline": "Best validation loss 1.422 vs 1.984",
+      "detail": "At width 128, Muon is 28.3% lower than AdamW. At width 64: 1.597 vs 2.057. The advantage is larger than predicted.",
+      "seconds": 187.42902970314026,
+      "counts": {
+        "total": 3,
+        "confirmed": 3,
+        "refuted": 0,
+        "inconclusive": 0
+      }
+    },
+    {
+      "id": "e3",
+      "code": "E3",
+      "name": "Multi-token prediction",
+      "question": "Does an extra prediction head help or interfere with the main head?",
+      "headline": "Main-head loss 2.059 → 2.050",
+      "detail": "The MTP head's own loss is 2.583. The predicted gradient alignment failed badly.",
+      "seconds": 104.46493721008301,
+      "counts": {
+        "total": 5,
+        "confirmed": 0,
+        "refuted": 1,
+        "inconclusive": 4
+      }
+    },
+    {
+      "id": "e4",
+      "code": "E4",
+      "name": "MoE routing",
+      "question": "Does sparse routing collapse, persist, or stay balanced?",
+      "headline": "Router max share 0.399 → 0.263",
+      "detail": "Entropy 0.681 → 0.721; validation loss 2.109 → 2.149.",
+      "seconds": 55.72024202346802,
+      "counts": {
+        "total": 4,
+        "confirmed": 3,
+        "refuted": 0,
+        "inconclusive": 1
+      }
+    },
+    {
+      "id": "e5",
+      "code": "E5",
+      "name": "Learning-rate tail",
+      "question": "Does a cosine tail pay off more when gradient noise is high?",
+      "headline": "Cosine tail 2.043 → 2.028",
+      "detail": "Benefit +0.016 at width 16, −0.005 at 32, +0.006 at 8. The noise interaction was not supported.",
+      "seconds": 188.36858797073364,
+      "counts": {
+        "total": 3,
+        "confirmed": 0,
+        "refuted": 2,
+        "inconclusive": 1
+      }
+    },
+    {
+      "id": "e6",
+      "code": "E6",
+      "name": "Learned memory gating",
+      "question": "Can a model learn when to trust a stale external memory?",
+      "headline": "NEW-fact top-1 0.000 → 0.133",
+      "detail": "OLD-fact top-1 falls from 1.000 to 0.083. The gate recovers updated facts by suppressing hints, not by clean selective trust.",
+      "seconds": 89.72352600097656,
+      "counts": {
+        "total": 9,
+        "confirmed": 4,
+        "refuted": 2,
+        "inconclusive": 3
+      }
+    },
+    {
+      "id": "market",
+      "code": "M",
+      "name": "Live-market probe",
+      "question": "Does a walk-forward linear model find an edge after costs?",
+      "headline": "Directional accuracy 49.0%",
+      "detail": "MSE skill -3.2%; Sharpe after cost -0.149; volatility ACF(1) 0.358. No tradable linear edge.",
+      "seconds": 7.3541038036346436,
+      "counts": {
+        "total": 5,
+        "confirmed": 4,
+        "refuted": 0,
+        "inconclusive": 1
+      }
+    }
+  ],
+  "market": {
+    "symbol": "SPY",
+    "first_date": "2016-11-03",
+    "last_date": "2026-11-02",
+    "n_rows": 2512,
+    "n_folds": 24,
+    "n_trades": 755,
+    "directional_accuracy": 0.48994638069705093,
+    "mse_skill": -0.03212114733341154,
+    "sharpe_after_cost": -0.14869734864524026,
+    "vol_acf1": 0.3584198770070521,
+    "shuffled_accuracy": 0.5033512064343163
+  },
+  "groups": {
+    "e1": [
+      "E1",
+      "Weight decay"
+    ],
+    "e2": [
+      "E2",
+      "Muon vs AdamW"
+    ],
+    "e3": [
+      "E3",
+      "Multi-token prediction"
+    ],
+    "e4": [
+      "E4",
+      "MoE routing"
+    ],
+    "e5": [
+      "E5",
+      "Learning-rate tail"
+    ],
+    "e6": [
+      "E6",
+      "Learned memory gating"
+    ],
+    "market": [
+      "M",
+      "Live-market probe"
+    ]
+  }
+}

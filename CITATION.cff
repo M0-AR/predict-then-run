@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this benchmark, cite the repository and the pre-registered study."
+title: "Predict-Then-Run: A Claim-Level Benchmark for Tiny-Scale Mechanistic LLM Research"
+authors:
+  - name: "Predict-Then-Run Contributors"
+version: 0.1.0
+date-released: 2026-11-03
+license: Apache-2.0
+repository-code: "https://github.com/M0-AR/predict-then-run"
+keywords:
+  - pre-registration
+  - reproducibility
+  - language-model interpretability
+  - benchmark
+  - tiny-scale experiments
